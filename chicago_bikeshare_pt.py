@@ -55,11 +55,11 @@ input("Aperte Enter para continuar...")
 def column_to_list(data: list, index: int) -> list:
     """
     Transforma a coluna de dados em uma lista
-    #      Argumentos:
-    #          data: A lista completa de dados.
-    #          param2: O índice desejado.
-    #      Retorna:
-    #          Uma lista de dados
+          Argumentos:
+              data: A lista completa de dados.
+              param2: O índice desejado.
+          Retorna:
+              Uma lista de dados
     """
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
@@ -106,10 +106,10 @@ input("Aperte Enter para continuar...")
 def count_gender(data_list: list) -> list:
     """
     Realiza um somatório para determinar o número de usuários pelos gêneros
-    #      Argumentos:
-    #          data_list: A lista de base de dados.
-    #      Retorna:
-    #          Uma lista com o número de usuários do sexo masculino e feminino respectivamente.
+          Argumentos:
+              data_list: A lista de base de dados.
+          Retorna:
+              Uma lista com o número de usuários do sexo masculino e feminino respectivamente.
     """
     male = 0
     female = 0
@@ -147,7 +147,7 @@ def most_popular_gender(data_list: list) -> str:
     masculino, feminino = count_gender(data_list)
     if masculino > feminino:
         answer = "Male"
-    elif masculino == ferminino:
+    elif masculino == feminino:
         answer = "Equals"
     else:
         answer = "Female"
@@ -177,8 +177,34 @@ plt.show(block=True)
 input("Aperte Enter para continuar...")
 # TAREFA 7
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
+def count_items(column_list) -> tuple: ## Essa função irá ser utilizada também para resolução da atividade desafio
+    """
+    Função que retorna os tipos de usuário baseando-se na coluna
+         Argumentos:
+             column_list: A lista desejada
+         Retorna:
+            Duas listas contendo os tipos dos items e a quantidade de vezes que eles aparecem
+    """
+    item_types = []
+    count_items = []
+    for element in column_list:
+        if element not in item_types:
+            item_types.append(element)
+            count_items.append(1)
+        else:
+            count_items[item_types.index(element)] += 1
+    print(item_types)
+    return item_types, count_items
 print("\nTAREFA 7: Verifique o gráfico!")
-
+user_types_list = column_to_list(data_list, -3)
+user_types, user_types_count = count_items(user_types_list)
+y_pos = list(range(len(user_types)))
+plt.bar(y_pos, user_types_count)
+plt.ylabel('Quantidade')
+plt.xlabel('Tipo')
+plt.xticks(y_pos,user_types)
+plt.title('Quantidade por Tipo')
+plt.show(block=True)
 
 input("Aperte Enter para continuar...")
 # TAREFA 8
@@ -255,24 +281,7 @@ input("Aperte Enter para continuar...")
 print("Você vai encarar o desafio? (yes ou no)")
 answer = "yes"
 
-def count_items(column_list) -> tuple:
-    """
-    Função que retorna os tipos de usuário baseando-se na coluna
-         Argumentos:
-             column_list: A lista desejada
-         Retorna:
-            Duas listas contendo os tipos dos items e a quantidade de vezes que eles aparecem
-    """
-    item_types = []
-    count_items = []
-    for element in column_list:
-        if element not in item_types:
-            item_types.append(element)
-            count_items.append(1)
-        else:
-            count_items[item_types.index(element)] += 1
-    print(item_types)
-    return item_types, count_items
+# Movi esse código para cima para reutiliza-lo no desenvolvimento do gráfico da atividade 7
 
 
 if answer == "yes":
